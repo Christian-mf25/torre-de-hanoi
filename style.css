@@ -1,6 +1,6 @@
         /* RESET CSS */
 
-
+/* 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -21,7 +21,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -43,7 +43,7 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
+} */
 
         /* RESET CSS */
 
@@ -53,15 +53,45 @@ table {
 }
 
 .torre{
+	display: flex;
+	flex-direction: column;
     align-items: center;
+	justify-content: flex-end;
     margin: 10px;
     border: solid black 2px;
     height: 200px;
     width: 150px;
-    display: flex;
+    
+    
+    
 
 }
 
-#disco1{
+.d1{
+	width: 20%;
+	height: 20px;
+	background-color: red;
+	/* border-radius: 10px; */
+}
+
+.d2{
+	width: 30%;
+	height: 20px;
+	background-color: rgb(0, 26, 255);
+}
+
+.d3{
+	width: 40%;
+	height: 20px;
+	background-color: rgb(116, 19, 133);
+}
+
+.d4{
+	width: 50%;
+	height: 20px;
+	background-color: rgb(9, 255, 0);
+}
+
+/* #disco1{
     width: 100px;
-}
+} */
