@@ -3,31 +3,6 @@ let t2 = document.getElementById("t2")
 let t3 = document.getElementById("t3")
 
 
-let data1 = document.getElementById('d1')
-let dataLargura1 = Number(data1.dataset.disco)
-
-let data2 = document.getElementById('d2')
-let dataLargura2 = Number(data2.dataset.disco)
-
-let data3 = document.getElementById('d3')
-let dataLargura3 = Number(data3.dataset.disco)
-
-let data4 = document.getElementById('d4')
-let dataLargura4 = Number(data4.dataset.disco)
-
-
-let arrLargura = [
-        dataLargura1, 
-        dataLargura2, 
-        dataLargura3, 
-        dataLargura4
-    ]
-
-console.log(arrLargura)
-
-
-
-
 // armazenar a largura do disco 
 // condição para se o disco armazenado é menor que o disco da torre
 // se for menor adiciona na torre se for maior não alterar o valor 
@@ -38,28 +13,60 @@ console.log(arrLargura)
 
 let disco
 let dataDisco
-let larguraDisco 
 
+let lastT1 = 0
+let lastT2 = 0
+let lastT3 = 0
 
-const valorDisco = (primeiro, torre) =>{
+const valorDisco = (primeiro, torre, valorTorre, dataDisco) =>{
 
-    
     if(disco === undefined){
         primeiro.remove()
         disco = primeiro
+        // dataDisco = Number(primeiro.dataset.disco)
     }
-    // else{
-    //     torre.appendChild(disco)
-    //     disco = undefined
-    // }
+    else if(disco !== undefined && valorTorre > dataDisco || valorTorre === 0){
+        torre.prepend(disco)
+        disco = undefined
+        valorTorre = 0
+    }
+}
+
+const zeraTorre = () =>{
+
+
 
 }
 
-const compara = (dataDisco, atual) =>{
+const pegaUltimo = () =>{
+
+    if(t1.firstElementChild !== null){
+        lastT1 = t1.firstElementChild.dataset.disco
+    }
+    if(t1.firstElementChild === null){
+        lastT1 = 0
+    }
+
+    if(t2.firstElementChild !== null){
+        lastT2 = t2.firstElementChild.dataset.disco
+    }
+    if(t2.firstElementChild === null){
+        lastT2 = 0
+    }
+
+    if(t3.firstElementChild !== null){
+        lastT3 = t3.firstElementChild.dataset.disco
+    }
+    if(t3.firstElementChild === null){
+        lastT3 = 0
+    }
+}
+
+
+const compara = (dataDisco, ) =>{
     
     if(dataDisco < atual){
-        torre.appendChild(disco)
-        disco = undefined
+
     }
 
 }
@@ -69,48 +76,67 @@ t1.addEventListener("click", function(){
     let primeiro = t1.firstElementChild
     let torre = t1
 
-    let dataDisco = Number(primeiro.dataset.disco)
-    console.log(dataDisco)
+    let valorTorre = lastT1
+
+// troca disco de torre
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
+    
+    // define largura ultimo disco outras torres
 
 
-    valorDisco(primeiro, torre)
-    
-    
+    pegaUltimo()
+
+/* -------------------------------------------------------- */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
+
+    if(primeiro !== null){
+        dataDisco = Number(primeiro.dataset.disco)
+    }
     
 
 })
+
 
 t2.addEventListener("click", function(){
 
     let primeiro = t2.firstElementChild
     let torre = t2
+    let valorTorre = lastT2
 
-    // let atual = Number(primeiro.dataset.disco)
-
-
-    valorDisco(primeiro, torre)
-
-
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
+    
+    pegaUltimo()
 
 
 
+    /* _____________________________________________ */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
+
+    if(primeiro !== null){
+        dataDisco = Number(primeiro.dataset.disco)
+    }
+    
 
 })
+
 
 t3.addEventListener("click", function(){
 
-
     let primeiro = t3.firstElementChild
     let torre = t3
+    let valorTorre = Number(lastT3)
 
-    // let atual = Number(primeiro.dataset.disco)
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
+
+    pegaUltimo()
 
 
-    valorDisco(primeiro, torre)
+    /* ------------------------------------------------------ */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
 
-
+    if(primeiro !== null){
+        dataDisco = Number(primeiro.dataset.disco)
+    }
+    
     
 })
-
-
-// console.log(larguraT1, larguraT2, larguraT3)
