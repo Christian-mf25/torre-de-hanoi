@@ -61,35 +61,43 @@ table {
     border: solid black 2px;
     height: 200px;
     width: 150px;
-    
-    
-    
-
 }
 
-.d1{
+
+.teste{
+	width: 150px;
+	height: 100px;
+	background-color: rgb(116, 19, 133);
+}
+
+#d1{
 	width: 20%;
 	height: 20px;
 	background-color: red;
 	/* border-radius: 10px; */
 }
 
-.d2{
+#d2{
 	width: 30%;
 	height: 20px;
 	background-color: rgb(0, 26, 255);
 }
 
-.d3{
+#d3{
 	width: 40%;
 	height: 20px;
 	background-color: rgb(116, 19, 133);
 }
 
-.d4{
+#d4{
 	width: 50%;
 	height: 20px;
 	background-color: rgb(9, 255, 0);
+}
+
+
+.hidden{
+	display: none;
 }
 
 /* #disco1{
