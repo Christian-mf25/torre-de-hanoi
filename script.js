@@ -1,116 +1,207 @@
+/* DOM CRIA JOGO*/
+
+const body = document.getElementById('pagina')
+
+const divJogo = document.createElement('div')
+divJogo.setAttribute('id', 'jogo')
+
+
+const divTorre1 = document.createElement('div')
+divTorre1.setAttribute('id', 't1')
+divTorre1.classList.add('torre')
+
+const divTorre2 = document.createElement('div')
+divTorre2.setAttribute('id', 't2')
+divTorre2.classList.add('torre')
+
+const divTorre3 = document.createElement('div')
+divTorre3.setAttribute('id', 't3')
+divTorre3.classList.add('torre')
+
+
+const divDisco1 = document.createElement('div')
+divDisco1.setAttribute('id', 'd1')
+divDisco1.setAttribute('data-disco', '1')
+
+const divDisco2 = document.createElement('div')
+divDisco2.setAttribute('id', 'd2')
+divDisco2.setAttribute('data-disco', '2')
+
+const divDisco3 = document.createElement('div')
+divDisco3.setAttribute('id', 'd3')
+divDisco3.setAttribute('data-disco', '3')
+
+const divDisco4 = document.createElement('div')
+divDisco4.setAttribute('id', 'd4')
+divDisco4.setAttribute('data-disco', '4')
+
+const divLog = document.createElement('div')
+divLog.setAttribute('id', 'log')
+divLog.innerText = 'Mova um disco para iniciar!'
+
+
+
+body.appendChild(divJogo)
+divJogo.appendChild(divTorre1)
+divJogo.appendChild(divTorre2)
+divJogo.appendChild(divTorre3)
+
+divTorre1.appendChild(divDisco1)
+divTorre1.appendChild(divDisco2)
+divTorre1.appendChild(divDisco3)
+divTorre1.appendChild(divDisco4)
+
+body.appendChild(divLog)
+
+/* DOM CRIA JOGO */
+
+
+/* VARIÁVEIS */
+
 let t1 = document.getElementById("t1")
 let t2 = document.getElementById("t2")
 let t3 = document.getElementById("t3")
 
+let log = document.getElementById('log')
 
-let data1 = document.getElementById('d1')
-let dataLargura1 = Number(data1.dataset.disco)
-
-let data2 = document.getElementById('d2')
-let dataLargura2 = Number(data2.dataset.disco)
-
-let data3 = document.getElementById('d3')
-let dataLargura3 = Number(data3.dataset.disco)
-
-let data4 = document.getElementById('d4')
-let dataLargura4 = Number(data4.dataset.disco)
-
-
-let arrLargura = [
-        dataLargura1, 
-        dataLargura2, 
-        dataLargura3, 
-        dataLargura4
-    ]
-
-console.log(arrLargura)
-
-
-
-
-// armazenar a largura do disco 
-// condição para se o disco armazenado é menor que o disco da torre
-// se for menor adiciona na torre se for maior não alterar o valor 
-
-// cada torre é um array contendo as divs(blocos)
-// funcao que transfere de um para outro
-
+const botao = document.getElementById('botao')
 
 let disco
 let dataDisco
-let larguraDisco 
+
+let lastT1 = 0
+let lastT2 = 0
+let lastT3 = 0
+
+/* VARIÁVEIS */
 
 
-const valorDisco = (primeiro, torre) =>{
+/* FUNÇÕES */
 
-    
-    if(disco === undefined){
+const valorDisco = (primeiro, torre, valorTorre, dataDisco) => {
+
+    if (disco === undefined) {
         primeiro.remove()
         disco = primeiro
-    }
-    // else{
-    //     torre.appendChild(disco)
-    //     disco = undefined
-    // }
-
-}
-
-const compara = (dataDisco, atual) =>{
-    
-    if(dataDisco < atual){
-        torre.appendChild(disco)
+    } else if (disco !== undefined && valorTorre > dataDisco || valorTorre === 0) {
+        torre.prepend(disco)
         disco = undefined
+        valorTorre = 0
+        log.classList.remove('log-alert')
+        log.innerText = "Belo movimento!"
+    } else {
+        log.classList.add('log-alert')
+        log.innerText = "Ops, você não pode fazer isso!"
     }
-
 }
 
-t1.addEventListener("click", function(){
-        
+
+const pegaUltimo = () => {
+
+    if (t1.firstElementChild !== null) {
+        lastT1 = t1.firstElementChild.dataset.disco
+    }
+    if (t1.firstElementChild === null) {
+        lastT1 = 0
+    }
+
+    if (t2.firstElementChild !== null) {
+        lastT2 = t2.firstElementChild.dataset.disco
+    }
+    if (t2.firstElementChild === null) {
+        lastT2 = 0
+    }
+
+    if (t3.firstElementChild !== null) {
+        lastT3 = t3.firstElementChild.dataset.disco
+    }
+    if (t3.firstElementChild === null) {
+        lastT3 = 0
+    }
+}
+
+
+
+const vitoria = () => {
+    if (t3.childElementCount === 4) {
+        log.classList.add('log-vitoria')
+        log.innerText = "Boa! Você conseguiu!"
+    }
+}
+
+/* FUNÇÕES */
+
+
+
+/* EVENTOS */
+
+t1.addEventListener("click", function () {
+
     let primeiro = t1.firstElementChild
     let torre = t1
 
-    let dataDisco = Number(primeiro.dataset.disco)
-    console.log(dataDisco)
+    let valorTorre = lastT1
 
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
 
-    valorDisco(primeiro, torre)
-    
-    
-    
+    pegaUltimo()
+
+    /* -------------------------------------------------------- */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
+
+    if (primeiro !== null) {
+        dataDisco = Number(primeiro.dataset.disco)
+    }
+
 
 })
 
-t2.addEventListener("click", function(){
+
+t2.addEventListener("click", function () {
 
     let primeiro = t2.firstElementChild
     let torre = t2
+    let valorTorre = lastT2
 
-    // let atual = Number(primeiro.dataset.disco)
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
 
+    pegaUltimo()
 
-    valorDisco(primeiro, torre)
+    /* _____________________________________________ */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
 
-
-
-
+    if (primeiro !== null) {
+        dataDisco = Number(primeiro.dataset.disco)
+    }
 
 
 })
 
-t3.addEventListener("click", function(){
 
+t3.addEventListener("click", function () {
 
     let primeiro = t3.firstElementChild
     let torre = t3
+    let valorTorre = Number(lastT3)
 
-    // let atual = Number(primeiro.dataset.disco)
+    valorDisco(primeiro, torre, valorTorre, dataDisco)
+
+    pegaUltimo()
+    vitoria()
+
+    /* ------------------------------------------------------ */
+    console.log(lastT1, lastT2, lastT3, valorTorre)
+
+    if (primeiro !== null) {
+        dataDisco = Number(primeiro.dataset.disco)
+    }
 
 
-    valorDisco(primeiro, torre)
-
-
-    
 })
 
 
-// console.log(larguraT1, larguraT2, larguraT3)
+botao.addEventListener("click", function () {
+    location.reload()
+})
+
+/* EVENTOS */
