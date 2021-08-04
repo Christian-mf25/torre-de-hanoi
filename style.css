@@ -4,10 +4,6 @@ body{
 	background-color: #dfe6e9;
 }
 
-/* .alert{
-	background-color: #f1a5a5;
-} */
-
 #jogo{
 	display: flex;
     flex-direction: row;
@@ -33,13 +29,6 @@ h1{
     border: 10px double #1C6EA4;
     border-radius: 40px 40px 0px 0px;
 }
-
-
-/* .teste{
-	width: 150px;
-	height: 100px;
-	background-color: rgb(116, 19, 133);
-} */
 
 #d1{
 	width: 50%;
