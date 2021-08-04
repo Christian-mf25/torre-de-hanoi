@@ -78,14 +78,17 @@ let lastT3 = 0
 
 /* FUNÇÕES */
 
-const valorDisco = (primeiro, torre, valorTorre, dataDisco) => {
+const valorDisco = (primeiro, torre, valorTorre) => {
 
     if (disco === undefined) {
         primeiro.remove()
         disco = primeiro
-    } else if (disco !== undefined && valorTorre > dataDisco || valorTorre === 0) {
+
+    } else if (disco !== undefined && valorTorre >= dataDisco || valorTorre === 0) {
+
         torre.prepend(disco)
         disco = undefined
+        dataDisco = undefined
         valorTorre = 0
         log.classList.remove('log-alert')
         log.innerText = "Belo movimento!"
@@ -99,27 +102,26 @@ const valorDisco = (primeiro, torre, valorTorre, dataDisco) => {
 const pegaUltimo = () => {
 
     if (t1.firstElementChild !== null) {
-        lastT1 = t1.firstElementChild.dataset.disco
+        lastT1 = Number(t1.firstElementChild.dataset.disco)
     }
     if (t1.firstElementChild === null) {
         lastT1 = 0
     }
 
     if (t2.firstElementChild !== null) {
-        lastT2 = t2.firstElementChild.dataset.disco
+        lastT2 = Number(t2.firstElementChild.dataset.disco)
     }
     if (t2.firstElementChild === null) {
         lastT2 = 0
     }
 
     if (t3.firstElementChild !== null) {
-        lastT3 = t3.firstElementChild.dataset.disco
+        lastT3 = Number(t3.firstElementChild.dataset.disco)
     }
     if (t3.firstElementChild === null) {
         lastT3 = 0
     }
 }
-
 
 
 const vitoria = () => {
@@ -138,21 +140,19 @@ const vitoria = () => {
 t1.addEventListener("click", function () {
 
     let primeiro = t1.firstElementChild
-    let torre = t1
-
     let valorTorre = lastT1
-
-    valorDisco(primeiro, torre, valorTorre, dataDisco)
+    let torre = t1
+    
+    valorDisco(primeiro, torre, valorTorre)
 
     pegaUltimo()
 
     /* -------------------------------------------------------- */
     console.log(lastT1, lastT2, lastT3, valorTorre)
 
-    if (primeiro !== null) {
+    if (primeiro !== null && dataDisco === undefined) {
         dataDisco = Number(primeiro.dataset.disco)
     }
-
 
 })
 
@@ -160,20 +160,20 @@ t1.addEventListener("click", function () {
 t2.addEventListener("click", function () {
 
     let primeiro = t2.firstElementChild
-    let torre = t2
     let valorTorre = lastT2
+    let torre = t2
+    
 
-    valorDisco(primeiro, torre, valorTorre, dataDisco)
+    valorDisco(primeiro, torre, valorTorre)
 
     pegaUltimo()
 
     /* _____________________________________________ */
     console.log(lastT1, lastT2, lastT3, valorTorre)
 
-    if (primeiro !== null) {
+    if (primeiro !== null && dataDisco === undefined) {
         dataDisco = Number(primeiro.dataset.disco)
     }
-
 
 })
 
@@ -181,10 +181,11 @@ t2.addEventListener("click", function () {
 t3.addEventListener("click", function () {
 
     let primeiro = t3.firstElementChild
-    let torre = t3
     let valorTorre = Number(lastT3)
+    let torre = t3
+    
 
-    valorDisco(primeiro, torre, valorTorre, dataDisco)
+    valorDisco(primeiro, torre, valorTorre)
 
     pegaUltimo()
     vitoria()
@@ -192,10 +193,9 @@ t3.addEventListener("click", function () {
     /* ------------------------------------------------------ */
     console.log(lastT1, lastT2, lastT3, valorTorre)
 
-    if (primeiro !== null) {
+    if (primeiro !== null && dataDisco === undefined) {
         dataDisco = Number(primeiro.dataset.disco)
     }
-
 
 })
 
