@@ -67,7 +67,7 @@ let log = document.getElementById('log')
 const botao = document.getElementById('botao')
 
 let disco
-let dataDisco
+let dataDisco = 0
 
 let lastT1 = 0
 let lastT2 = 0
@@ -83,16 +83,18 @@ const valorDisco = (primeiro, torre, valorTorre) => {
     if (disco === undefined) {
         primeiro.remove()
         disco = primeiro
+        dataDisco = 0
 
     } else if (disco !== undefined && valorTorre >= dataDisco || valorTorre === 0) {
 
         torre.prepend(disco)
         disco = undefined
-        dataDisco = undefined
-        valorTorre = 0
+        valorTorre = dataDisco
+        dataDisco = 0
         log.classList.remove('log-alert')
         log.innerText = "Belo movimento!"
     } else {
+
         log.classList.add('log-alert')
         log.innerText = "Ops, você não pode fazer isso!"
     }
@@ -131,6 +133,8 @@ const vitoria = () => {
     }
 }
 
+
+
 /* FUNÇÕES */
 
 
@@ -148,11 +152,11 @@ t1.addEventListener("click", function () {
     pegaUltimo()
 
     /* -------------------------------------------------------- */
-    console.log(lastT1, lastT2, lastT3, valorTorre)
+    console.log('t1',lastT1, 't2', lastT2, 't3', lastT3, 'vT', valorTorre, 'dD',dataDisco)
 
-    if (primeiro !== null && dataDisco === undefined) {
+    if (primeiro !== null && dataDisco === 0) {
         dataDisco = Number(primeiro.dataset.disco)
-    }
+    } 
 
 })
 
@@ -169,9 +173,9 @@ t2.addEventListener("click", function () {
     pegaUltimo()
 
     /* _____________________________________________ */
-    console.log(lastT1, lastT2, lastT3, valorTorre)
+    console.log('t1',lastT1, 't2', lastT2, 't3', lastT3, 'vT', valorTorre, 'dD',dataDisco)
 
-    if (primeiro !== null && dataDisco === undefined) {
+    if (primeiro !== null && dataDisco === 0) {
         dataDisco = Number(primeiro.dataset.disco)
     }
 
@@ -191,9 +195,9 @@ t3.addEventListener("click", function () {
     vitoria()
 
     /* ------------------------------------------------------ */
-    console.log(lastT1, lastT2, lastT3, valorTorre)
+    console.log('t1',lastT1, 't2', lastT2, 't3', lastT3, 'vT', valorTorre, 'dD',dataDisco)
 
-    if (primeiro !== null && dataDisco === undefined) {
+    if (primeiro !== null && dataDisco === 0) {
         dataDisco = Number(primeiro.dataset.disco)
     }
 
