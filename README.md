@@ -1,5 +1,3 @@
-# Entrega: Torre de Hanoi
-
 ## Torre de Hanoi
 
 A Torre de Hanoi é um quebra-cabeças.
